@@ -84,7 +84,7 @@
         );
       }
 
-      function redirectWithCountdown() {
+      function redirect() {
         var location = window.location;
         var issueNumber = location.pathname.split("/")[
           PATH_SEGMENTS_TO_SKIP + 1
@@ -111,17 +111,7 @@
 
             // Check if the destination URL is supported, and redirect accordingly
             if (isSupportedUrl(title)) {
-              // Countdown for 3 seconds before redirecting
-              var countdown = 3;
-              var countdownInterval = setInterval(function () {
-                if (countdown === 0) {
-                  clearInterval(countdownInterval);
-                  location.replace(title);
-                } else {
-                  document.getElementById("countdown").textContent = countdown;
-                  countdown--;
-                }
-              }, 1000);
+              location.replace(title);
             } else {
               location.replace(homepage);
             }
@@ -137,7 +127,7 @@
         xhr.send();
       }
 
-      redirectWithCountdown();
+      redirect();
     </script>
 </head>
 <body>
@@ -145,7 +135,6 @@
         <img src="logo.png" alt="Logo" />
         <h1 dir="rtl">در پیغام باز شده دکمه open را بزنید</h1>
         <p dir="rtl">در صورتی که پیغام برایتان نمایش داده نشد بر روی دکمه زیر بزنید:</p>
-        <p id="countdown">3</p>
         <button class="refresh-button" onclick="location.reload();">Refresh</button>
     </div>
 </body>
