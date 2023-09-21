@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>لینک خودکار دریچه</title>
+    <title> دریچه </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         /* Add your custom styles here */
@@ -36,7 +36,7 @@
             height: auto;
         }
 
-        .open-button {
+        .open-button, .refresh-button {
             display: inline-block;
             padding: 10px 20px;
             background-color: #007BFF;
@@ -46,9 +46,10 @@
             border-radius: 5px;
             cursor: pointer;
             text-decoration: none;
+            margin: 10px;
         }
 
-        .open-button:hover {
+        .open-button:hover, .refresh-button:hover {
             background-color: #0056b3;
         }
     </style>    
@@ -128,13 +129,13 @@
 
       redirect();
     </script>
-    </head>
-    <body>
-        <div class="container">
-            <img src="logo.png" alt="Logo" />
-            <h1>Redirecting...</h1>
-            <p>Please wait while you are redirected to the destination URL.</p>
-            <a href="#" class="open-button">Open</a>
-        </div>
-    </body>
-    </html>
+</head>
+<body>
+    <div class="container">
+        <img src="logo.png" alt="Logo" />
+        <h1>شما در حال هدایت به سمت برنامه مورد نظرتان هستید...</h1>
+        <p>در صورتی که پیغام برایتان نمایش داده نشد بر روی دکمه زیر بزنید:</p>
+        <button class="refresh-button" onclick="location.reload();">Refresh</button>
+    </div>
+</body>
+</html>
