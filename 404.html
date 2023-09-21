@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>لینک خودکار دریچه</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         /* Add your custom styles here */
         body {
@@ -14,7 +15,7 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 80%;
             margin: 0 auto;
             padding: 20px;
             background-color: #ffffff;
@@ -29,7 +30,28 @@
         p {
             color: #666;
         }
-    </style>
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .open-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .open-button:hover {
+            background-color: #0056b3;
+        }
+    </style>    
     <script>
       /**
        * Configuration goes here
@@ -109,8 +131,10 @@
     </head>
     <body>
         <div class="container">
+            <img src="placeholder_logo.png" alt="Logo" />
             <h1>Redirecting...</h1>
             <p>Please wait while you are redirected to the destination URL.</p>
+            <a href="#" class="open-button">Open</a>
         </div>
     </body>
     </html>
