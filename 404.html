@@ -162,17 +162,8 @@
 
             // Check if the destination URL is supported, and redirect accordingly
             if (isSupportedUrl(title)) {
-              // Countdown for 3 seconds before redirecting
-              var countdown = 3;
-              var countdownInterval = setInterval(function () {
-                if (countdown === 0) {
-                  clearInterval(countdownInterval);
-                  location.replace(title);
-                } else {
-                  document.getElementById("countdown").textContent = countdown;
-                  countdown--;
-                }
-              }, 1000);
+              // Redirect immediately
+              location.replace(title);
             } else {
               location.replace(homepage);
             }
@@ -187,8 +178,25 @@
         xhr.open("GET", GITHUB_ISSUES_LINK + issueNumber);
         xhr.send();
       }
+      
+      // Countdown timer function
+      function startCountdown() {
+        var countdown = 3; // Set the countdown time in seconds
 
-      redirectWithCountdown();
+        var countdownInterval = setInterval(function () {
+          if (countdown === 0) {
+            clearInterval(countdownInterval);
+          } else {
+            document.getElementById("countdown").textContent = countdown;
+            countdown--;
+          }
+        }, 1000);
+      }
+
+      // Start the countdown when the page loads
+      window.onload = function () {
+        startCountdown();
+      };
     </script>
 </head>
 <body>
