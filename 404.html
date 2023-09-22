@@ -2,108 +2,91 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>دریچه</title>
+    <title> دریچه </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+        /* Add your custom styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
 
-      body {
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: sans-serif;
-        background: #000;
-      }
+        .container {
+            max-width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
 
-      button {
-        border: none;
-        padding: 20px 40px;
-        font-size: 44px;
-        position: relative;
-        background: transparent;
-        color: #00FF00; /* Change the color to green */
-        text-transform: uppercase;
-        border: 3px solid #00FF00; /* Change the border color to green */
-        cursor: pointer;
-        transition: all 0.7s;
-        overflow: hidden;
-        border-radius: 100px;
-      }
+        h1 {
+            color: #333;
+        }
 
-      button:hover {
-        color: #000;
-      }
+        p {
+            color: #666;
+        }
 
-      span {
-        transition: all 0.7s;
-        z-index: -1;
-      }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
 
-      button .first {
-        content: "";
-        position: absolute;
-        right: 100%;
-        top: 0;
-        width: 25%;
-        height: 100%;
-        background: #00FF00; /* Change the background color to green */
-      }
+        /* Updated button styles */
+        .custom-button {
+            border: none;
+            padding: 20px 40px;
+            font-size: 44px;
+            position: relative;
+            background: transparent;
+            color: #00FF00; /* Change the color to green */
+            text-transform: uppercase;
+            border: 3px solid #00FF00; /* Change the border color to green */
+            cursor: pointer;
+            transition: all 0.7s;
+            overflow: hidden;
+            border-radius: 100px;
+        }
 
-      button:hover .first {
-        top: 0;
-        right: 0;
-      }
+        .custom-button:hover {
+            color: #000;
+        }
 
-      button .second {
-        content: "";
-        position: absolute;
-        left: 25%;
-        top: -100%;
-        height: 100%;
-        width: 25%;
-        background: #00FF00; /* Change the background color to green */
-      }
+        .custom-button .first,
+        .custom-button .second,
+        .custom-button .third,
+        .custom-button .fourth {
+            content: "";
+            position: absolute;
+            width: 25%;
+            height: 100%;
+            background: #00FF00; /* Change the background color to green */
+        }
 
-      button:hover .second {
-        top: 0;
-        left: 50%;
-      }
+        .custom-button:hover .first {
+            right: 0;
+            top: 0;
+        }
 
-      button .third {
-        content: "";
-        position: absolute;
-        left: 50%;
-        height: 100%;
-        top: 100%;
-        width: 25%;
-        background: #00FF00; /* Change the background color to green */
-      }
+        .custom-button:hover .second {
+            left: 25%;
+            top: -100%;
+        }
 
-      button:hover .third {
-        top: 0;
-        left: 25%;
-      }
+        .custom-button:hover .third {
+            left: 50%;
+            top: 100%;
+        }
 
-      button .fourth {
-        content: "";
-        position: absolute;
-        left: 100%;
-        top: 0;
-        height: 100%;
-        width: 25%;
-        background: #00FF00; /* Change the background color to green */
-      }
-
-      button:hover .fourth {
-        top: 0;
-        left: 0;
-      }
-    </style> 
+        .custom-button:hover .fourth {
+            left: 100%;
+            top: 0;
+        }
+    </style>
     <script>
       /**
        * Configuration goes here
