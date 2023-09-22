@@ -38,53 +38,70 @@
 
         /* Updated button styles */
         .custom-button {
+            padding: 0.6em 2em;
             border: none;
-            padding: 20px 40px;
-            font-size: 44px;
-            position: relative;
-            background: transparent;
-            color: #00FF00; /* Change the color to green */
-            text-transform: uppercase;
-            border: 3px solid #00FF00; /* Change the border color to green */
+            outline: none;
+            color: rgb(255, 255, 255);
+            background: #111;
             cursor: pointer;
-            transition: all 0.7s;
-            overflow: hidden;
-            border-radius: 100px;
+            position: relative;
+            z-index: 0;
+            border-radius: 10px;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
         }
 
-        .custom-button:hover {
-            color: #000;
+        .custom-button:before {
+            content: "";
+            background: linear-gradient(
+                45deg,
+                #ff0000,
+                #ff7300,
+                #fffb00,
+                #48ff00,
+                #00ffd5,
+                #002bff,
+                #7a00ff,
+                #ff00c8,
+                #ff0000
+            );
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            background-size: 400%;
+            z-index: -1;
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            animation: glowing-button 20s linear infinite;
+            transition: opacity 0.3s ease-in-out;
+            border-radius: 10px;
         }
 
-        .custom-button .first,
-        .custom-button .second,
-        .custom-button .third,
-        .custom-button .fourth {
+        @keyframes glowing-button {
+            0% {
+                background-position: 0 0;
+            }
+            50% {
+                background-position: 400% 0;
+            }
+            100% {
+                background-position: 0 0;
+            }
+        }
+
+        .custom-button:after {
+            z-index: -1;
             content: "";
             position: absolute;
-            width: 25%;
+            width: 100%;
             height: 100%;
-            background: #00FF00; /* Change the background color to green */
-        }
-
-        .custom-button:hover .first {
-            right: 0;
+            background: #222;
+            left: 0;
             top: 0;
-        }
-
-        .custom-button:hover .second {
-            left: 25%;
-            top: -100%;
-        }
-
-        .custom-button:hover .third {
-            left: 50%;
-            top: 100%;
-        }
-
-        .custom-button:hover .fourth {
-            left: 100%;
-            top: 0;
+            border-radius: 10px;
         }
     </style>
     <script>
