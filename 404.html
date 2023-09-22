@@ -135,26 +135,6 @@
             font-size: 48px; /* Larger font size */
             font-weight: bold;
         }
-
-        /* White triangle styles */
-        .white-triangle {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            border-top: 30px solid #fff; /* White triangle pointing down */
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-        }
-
-        /* Show the white triangle when countdown reaches 0.01 seconds */
-        .show-triangle .white-triangle {
-            opacity: 1;
-        }
     </style>
     <script>
       /**
@@ -236,9 +216,8 @@
         var countdown = 3000; // 3 seconds in milliseconds
 
         var countdownInterval = setInterval(function () {
-          if (countdown === 10) { // When countdown reaches 0.01 seconds
+          if (countdown === 0) {
             clearInterval(countdownInterval);
-            document.querySelector('.countdown-box').classList.add('show-triangle');
           } else {
             var countdownText = (countdown / 1000).toFixed(2); // Convert milliseconds to seconds with two decimal places
             document.getElementById("countdown").textContent = countdownText;
@@ -260,7 +239,6 @@
         <p dir="rtl">در صورتی که پیغام برایتان نمایش داده نشد بر روی دکمه دریچه بزنید:</p>
         <div class="countdown-box">
             <span id="countdown">3.00</span>
-            <div class="white-triangle"></div> <!-- White triangle initially hidden -->
         </div>
         <button class="refresh-button custom-button" onclick="location.reload();">دریچه</button>
     </div>
