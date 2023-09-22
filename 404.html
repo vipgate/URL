@@ -50,6 +50,7 @@
             user-select: none;
             -webkit-user-select: none;
             touch-action: manipulation;
+            transition: transform 0.3s ease-in-out;
         }
 
         .custom-button:before {
@@ -102,6 +103,35 @@
             left: 0;
             top: 0;
             border-radius: 10px;
+        }
+
+        /* Countdown Styles */
+        .countdown-box {
+            background-color: #007BFF;
+            color: #fff;
+            font-size: 24px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: transform 0.3s ease-in-out;
+            display: inline-block;
+        }
+
+        .countdown-box:hover {
+            transform: scale(1.1); /* Make it bigger on hover */
+        }
+
+        /* Updated countdown text styles */
+        #countdown {
+            font-size: 36px;
+            font-weight: bold;
+            margin: 0 10px;
+            transition: font-size 0.3s ease-in-out;
+        }
+
+        /* Make the "دریچه" button bigger on hover */
+        .custom-button:hover {
+            transform: scale(1.1);
         }
     </style>
     <script>
@@ -203,9 +233,9 @@
     <div class="container">
         <img src="logo.png" alt="Logo" />
         <h1 dir="rtl">در پیغام باز شده دکمه open را بزنید</h1>
-        <p dir="rtl">در صورتی که پیغام برایتان نمایش داده نشد بر روی دکمه دریجه بزنید:</p>
+        <p dir="rtl">در صورتی که پیغام برایتان نمایش داده نشد بر روی دکمه دریچه بزنید:</p>
         <div class="countdown-box">
-            صبر کنید <span id="countdown">3</span>
+            صبر کنید <span id="countdown">3</span> ثانیه
         </div>
         <button class="refresh-button custom-button" onclick="location.reload();">دریچه</button>
     </div>
