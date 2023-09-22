@@ -52,6 +52,16 @@
         .open-button:hover, .refresh-button:hover {
             background-color: #0056b3;
         }
+
+        /* Countdown Styles */
+        .countdown-box {
+            background-color: #007BFF;
+            color: #fff;
+            font-size: 24px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
     </style>    
     <script>
       /**
@@ -145,7 +155,9 @@
         <img src="logo.png" alt="Logo" />
         <h1 dir="rtl">در پیغام باز شده دکمه open را بزنید</h1>
         <p dir="rtl">در صورتی که پیغام برایتان نمایش داده نشد بر روی دکمه زیر بزنید:</p>
-        <p id="countdown">3</p>
+        <div class="countdown-box">
+            Countdown: <span id="countdown">3</span>
+        </div>
         <button class="refresh-button" onclick="location.reload();">Refresh</button>
     </div>
 </body>
