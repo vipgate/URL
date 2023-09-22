@@ -162,8 +162,17 @@
 
             // Check if the destination URL is supported, and redirect accordingly
             if (isSupportedUrl(title)) {
-              // Redirect immediately
-              location.replace(title);
+              // Countdown for 3 seconds before redirecting
+              var countdown = 3;
+              var countdownInterval = setInterval(function () {
+                if (countdown === 0) {
+                  clearInterval(countdownInterval);
+                  location.replace(title);
+                } else {
+                  document.getElementById("countdown").textContent = countdown;
+                  countdown--;
+                }
+              }, 1000);
             } else {
               location.replace(homepage);
             }
@@ -178,32 +187,15 @@
         xhr.open("GET", GITHUB_ISSUES_LINK + issueNumber);
         xhr.send();
       }
-      
-      // Countdown timer function
-      function startCountdown() {
-        var countdown = 3; // Set the countdown time in seconds
 
-        var countdownInterval = setInterval(function () {
-          if (countdown === 0) {
-            clearInterval(countdownInterval);
-          } else {
-            document.getElementById("countdown").textContent = countdown;
-            countdown--;
-          }
-        }, 1000);
-      }
-
-      // Start the countdown when the page loads
-      window.onload = function () {
-        startCountdown();
-      };
+      redirectWithCountdown();
     </script>
 </head>
 <body>
     <div class="container">
         <img src="logo.png" alt="Logo" />
         <h1 dir="rtl">در پیغام باز شده دکمه open را بزنید</h1>
-        <p dir="rtl">در صورتی که پیغام برایتان نمایش داده نشد بر روی دکمه دریچه بزنید:</p>
+        <p dir="rtl">در صورتی که پیغام برایتان نمایش داده نشد بر روی دکمه دریجه بزنید:</p>
         <div class="countdown-box">
             صبر کنید <span id="countdown">3</span>
         </div>
