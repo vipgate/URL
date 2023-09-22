@@ -46,11 +46,15 @@
             cursor: pointer;
             position: relative;
             z-index: 0;
-            border-radius: 10px;
+            border-radius: 15px; /* Increased border radius for a bigger button */
             user-select: none;
             -webkit-user-select: none;
             touch-action: manipulation;
             transition: transform 0.3s ease-in-out;
+        }
+
+        .custom-button:hover {
+            transform: scale(1.1); /* Make it bigger on hover */
         }
 
         .custom-button:before {
@@ -78,7 +82,7 @@
             height: calc(100% + 4px);
             animation: glowing-button 20s linear infinite;
             transition: opacity 0.3s ease-in-out;
-            border-radius: 10px;
+            border-radius: 15px; /* Increased border radius for a bigger button */
         }
 
         @keyframes glowing-button {
@@ -102,36 +106,34 @@
             background: #222;
             left: 0;
             top: 0;
-            border-radius: 10px;
+            border-radius: 15px; /* Increased border radius for a bigger button */
         }
 
         /* Countdown Styles */
         .countdown-box {
-            background-color: #007BFF;
-            color: #fff;
-            font-size: 24px;
-            padding: 10px 20px;
-            border-radius: 5px;
-            margin-top: 20px;
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
+            font-size: 36px; /* Larger font size */
+            padding: 20px; /* Increased padding for a bigger circle */
+            border-radius: 50%; /* Circular shape */
+            margin: 20px auto; /* Centered under the logo */
+            width: 120px; /* Width of the circle */
+            height: 120px; /* Height of the circle */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease-in-out;
-            display: inline-block;
         }
 
         .countdown-box:hover {
             transform: scale(1.1); /* Make it bigger on hover */
         }
 
-        /* Updated countdown text styles */
+        /* Countdown text styles */
         #countdown {
-            font-size: 36px;
+            font-size: 48px; /* Larger font size */
             font-weight: bold;
-            margin: 0 10px;
-            transition: font-size 0.3s ease-in-out;
-        }
-
-        /* Make the "دریچه" button bigger on hover */
-        .custom-button:hover {
-            transform: scale(1.1);
         }
     </style>
     <script>
@@ -211,16 +213,17 @@
       
       // Countdown timer function
       function startCountdown() {
-        var countdown = 3; // Set the countdown time in seconds
+        var countdown = 3000; // 3 seconds in milliseconds
 
         var countdownInterval = setInterval(function () {
           if (countdown === 0) {
             clearInterval(countdownInterval);
           } else {
-            document.getElementById("countdown").textContent = countdown;
-            countdown--;
+            var countdownText = (countdown / 1000).toFixed(2); // Convert milliseconds to seconds with two decimal places
+            document.getElementById("countdown").textContent = countdownText;
+            countdown -= 10; // Decrease by 10 milliseconds
           }
-        }, 1000);
+        }, 10); // Update every 10 milliseconds
       }
 
       // Start the countdown when the page loads
@@ -235,7 +238,7 @@
         <h1 dir="rtl">در پیغام باز شده دکمه open را بزنید</h1>
         <p dir="rtl">در صورتی که پیغام برایتان نمایش داده نشد بر روی دکمه دریچه بزنید:</p>
         <div class="countdown-box">
-            صبر کنید <span id="countdown">3</span> ثانیه
+            <span id="countdown">3.00</span>
         </div>
         <button class="refresh-button custom-button" onclick="location.reload();">دریچه</button>
     </div>
