@@ -61,7 +61,20 @@
             padding: 10px 20px;
             border-radius: 5px;
             margin-top: 20px;
-        }
+            
+            .custom-button {
+        background-color: #ff6600; /* Change the background color to your desired color */
+        color: #fff; /* Change the text color to white or your desired color */
+        font-size: 20px; /* Change the font size to your desired size */
+        border: none; /* Remove the border if desired */
+        border-radius: 10px; /* Add border-radius for rounded corners if desired */
+        padding: 15px 30px; /* Adjust padding for button size */
+    }
+    
+    .custom-button:hover {
+        background-color: #ff3300; /* Change the hover background color to your desired color */
+    }
+            
     </style>    
     <script>
       /**
@@ -154,11 +167,11 @@
     <div class="container">
         <img src="logo.png" alt="Logo" />
         <h1 dir="rtl">در پیغام باز شده دکمه open را بزنید</h1>
-        <p dir="rtl">در صورتی که پیغام برایتان نمایش داده نشد بر روی دکمه زیر بزنید:</p>
+        <p dir="rtl">در صورتی که پیغام برایتان نمایش داده نشد بر روی دکمه دریجه بزنید:</p>
         <div class="countdown-box">
-            Countdown: <span id="countdown">3</span>
+            صبر کنید <span id="countdown">3</span>
         </div>
-        <button class="refresh-button" onclick="location.reload();">Refresh</button>
+        <button class="refresh-button custom-button" onclick="location.reload();">دریچه</button>
     </div>
 </body>
 </html>
