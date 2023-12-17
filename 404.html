@@ -115,87 +115,88 @@
       /**
        * DO NOT TOUCH ANYTHING BELOW THIS COMMENT UNLESS YOU KNOW WHAT YOU ARE DOING
        */
-      function isUrl(url) {
-        // Regex from https://stackoverflow.com/a/3809435, with a modification to allow for TLDs of up to 24 characters
-        return /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,24}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)+$/.test(
-          url
-        );
-      }
+       function isUrl(url) {
+            // Regex from https://stackoverflow.com/a/3809435, with a modification to allow for TLDs of up to 24 characters
+            return /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,24}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)+$/.test(
+                url
+            );
+        }
 
-      function isSupportedUrl(url) {
-        // Check if the destination URL starts with a supported pattern
-        return (
-          url.startsWith("http://") ||
-          url.startsWith("https://") ||
-          url.startsWith("sn://subscription?url=") ||
-          url.startsWith("v2rayng://install-config?url=") ||
-          url.startsWith("sub://") ||
-          url.startsWith("streisand://import/") ||
-          url.startsWith("v2box://install-sub?url=")
-        );
-      }
+        function isSupportedUrl(url) {
+            // Updated to include sing-box://import-remote-profile?url=
+            return (
+                url.startsWith("http://") ||
+                url.startsWith("https://") ||
+                url.startsWith("sn://subscription?url=") ||
+                url.startsWith("v2rayng://install-config?url=") ||
+                url.startsWith("sub://") ||
+                url.startsWith("streisand://import/") ||
+                url.startsWith("v2box://install-sub?url=") ||
+                url.startsWith("sing-box://import-remote-profile?url=")
+            );
+        }
 
-      function redirectWithCountdown() {
-        var location = window.location;
-        var issueNumber = location.pathname.split("/")[
-          PATH_SEGMENTS_TO_SKIP + 1
-        ];
-        var homepage =
-          location.protocol +
-          "//" +
-          location.hostname +
-          (location.port ? ":" + location.port : "") +
-          "/" +
-          location.pathname.split("/")[PATH_SEGMENTS_TO_SKIP];
+        function redirectWithCountdown() {
+            var location = window.location;
+            var issueNumber = location.pathname.split("/")[
+                PATH_SEGMENTS_TO_SKIP + 1
+            ];
+            var homepage =
+                location.protocol +
+                "//" +
+                location.hostname +
+                (location.port ? ":" + location.port : "") +
+                "/" +
+                location.pathname.split("/")[PATH_SEGMENTS_TO_SKIP];
 
-        var xhr = new XMLHttpRequest();
+            var xhr = new XMLHttpRequest();
 
-        xhr.onload = function () {
-          try {
-            var payload = JSON.parse(xhr.response);
-            var message = payload.message;
-            var title = payload.title;
+            xhr.onload = function () {
+                try {
+                    var payload = JSON.parse(xhr.response);
+                    var message = payload.message;
+                    var title = payload.title;
 
-            // Workaround IE 11 lack of support for new URL()
-            var url = document.createElement("a");
-            url.setAttribute("href", title);
+                    // Workaround IE 11 lack of support for new URL()
+                    var url = document.createElement("a");
+                    url.setAttribute("href", title);
 
-            // Check if the destination URL is supported, and redirect accordingly
-            if (isSupportedUrl(title)) {
-              // Countdown for 3 seconds before redirecting
-              var countdown = 3;
-              var countdownInterval = setInterval(function () {
-                if (countdown === 0) {
-                  clearInterval(countdownInterval);
-                  location.replace(title);
-                } else {
-                  document.getElementById("countdown").textContent = countdown;
-                  countdown--;
+                    // Check if the destination URL is supported, and redirect accordingly
+                    if (isSupportedUrl(title)) {
+                        // Countdown for 3 seconds before redirecting
+                        var countdown = 3;
+                        var countdownInterval = setInterval(function () {
+                            if (countdown === 0) {
+                                clearInterval(countdownInterval);
+                                location.replace(title);
+                            } else {
+                                document.getElementById("countdown").textContent = countdown;
+                                countdown--;
+                            }
+                        }, 1000);
+                    } else {
+                        location.replace(homepage);
+                    }
+                } catch (e) {
+                    location.replace(homepage);
                 }
-              }, 1000);
-            } else {
-              location.replace(homepage);
-            }
-          } catch (e) {
-            location.replace(homepage);
-          }
-        };
+            };
 
-        xhr.onerror = function () {
-          location.replace(homepage);
-        };
-        xhr.open("GET", GITHUB_ISSUES_LINK + issueNumber);
-        xhr.send();
-      }
+            xhr.onerror = function () {
+                location.replace(homepage);
+            };
+            xhr.open("GET", GITHUB_ISSUES_LINK + issueNumber);
+            xhr.send();
+        }
 
-      redirectWithCountdown();
+        redirectWithCountdown();
     </script>
 </head>
 <body>
     <div class="container">
         <img src="logo.png" alt="Logo" />
         <h1 dir="rtl">در پیغام باز شده دکمه open را بزنید</h1>
-        <p dir="rtl">در صورتی که پیغام برایتان نمایش داده نشد بر روی دکمه دریجه بزنید:</p>
+        <p dir="rtl">در صورتی که پیغام برایتان نمایش داده نشد بر روی دکمه دریچه بزنید:</p>
         <div class="countdown-box">
             صبر کنید <span id="countdown">3</span>
         </div>
