@@ -1,78 +1,206 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8" />
-    <title>Redirecting...</title>
+    <title> دریچه </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        /* Add your custom styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Updated button styles */
+        .custom-button {
+            padding: 0.6em 2em;
+            border: none;
+            outline: none;
+            color: rgb(255, 255, 255);
+            background: #111;
+            cursor: pointer;
+            position: relative;
+            z-index: 0;
+            border-radius: 10px;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        .custom-button:before {
+            content: "";
+            background: linear-gradient(
+                45deg,
+                #ff0000,
+                #ff7300,
+                #fffb00,
+                #48ff00,
+                #00ffd5,
+                #002bff,
+                #7a00ff,
+                #ff00c8,
+                #ff0000
+            );
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            background-size: 400%;
+            z-index: -1;
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            animation: glowing-button 20s linear infinite;
+            transition: opacity 0.3s ease-in-out;
+            border-radius: 10px;
+        }
+
+        @keyframes glowing-button {
+            0% {
+                background-position: 0 0;
+            }
+            50% {
+                background-position: 400% 0;
+            }
+            100% {
+                background-position: 0 0;
+            }
+        }
+
+        .custom-button:after {
+            z-index: -1;
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #222;
+            left: 0;
+            top: 0;
+            border-radius: 10px;
+        }
+    </style>
     <script>
       /**
        * Configuration goes here
        */
       // Format: https://api.github.com/repos/{owner}/{repo}/issues/
-      var GITHUB_ISSUES_LINK =
-        "https://api.github.com/repos/mayandev/gh-pages-url-shortener-db/issues/";
-      var PATH_SEGMENTS_TO_SKIP = 0;
+      var GITHUB_ISSUES_LINK = "https://api.github.com/repos/vipgate/AUTODB/issues/";
+      var PATH_SEGMENTS_TO_SKIP = 1;
 
       /**
        * DO NOT TOUCH ANYTHING BELOW THIS COMMENT UNLESS YOU KNOW WHAT YOU ARE DOING
        */
-      function isUrl(url) {
-        // Regex from https://stackoverflow.com/a/3809435, with a modification to allow for TLDs of up to 24 characters
-        return /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,24}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)+$/.test(
-          url
-        );
-      }
+       function isUrl(url) {
+            // Regex from https://stackoverflow.com/a/3809435, with a modification to allow for TLDs of up to 24 characters
+            return /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,24}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)+$/.test(
+                url
+            );
+        }
 
-      function redirect() {
-        var location = window.location;
-        var issueNumber = location.pathname.split("/")[
-          PATH_SEGMENTS_TO_SKIP + 1
-        ];
-        var homepage =
-          location.protocol +
-          "//" +
-          location.hostname +
-          (location.port ? ":" + location.port : "") +
-          "/" +
-          location.pathname.split("/")[PATH_SEGMENTS_TO_SKIP];
+        function isSupportedUrl(url) {
+            // Updated to include sing-box://import-remote-profile?url=
+            return (
+                url.startsWith("http://") ||
+                url.startsWith("https://") ||
+                url.startsWith("sn://subscription?url=") ||
+                url.startsWith("v2rayng://install-config?url=") ||
+                url.startsWith("sub://") ||
+                url.startsWith("streisand://import/") ||
+                url.startsWith("v2box://install-sub?url=") ||
+                url.startsWith("sing-box://import-remote-profile?url=")
+            );
+        }
 
-        var xhr = new XMLHttpRequest();
+        function redirectWithCountdown() {
+            var location = window.location;
+            var issueNumber = location.pathname.split("/")[
+                PATH_SEGMENTS_TO_SKIP + 1
+            ];
+            var homepage =
+                location.protocol +
+                "//" +
+                location.hostname +
+                (location.port ? ":" + location.port : "") +
+                "/" +
+                location.pathname.split("/")[PATH_SEGMENTS_TO_SKIP];
 
-        xhr.onload = function () {
-          try {
-            var payload = JSON.parse(xhr.response);
-            var message = payload.message;
-            var title = payload.title;
+            var xhr = new XMLHttpRequest();
 
-            // Workaround IE 11 lack of support for new URL()
-            var url = document.createElement("a");
-            url.setAttribute("href", title);
+            xhr.onload = function () {
+                try {
+                    var payload = JSON.parse(xhr.response);
+                    var message = payload.message;
+                    var title = payload.title;
 
-            // Invalid URLs includes invalid issue numbers, issue titles that are not URLs, and recursive destination URLs
-            var isInvalidUrl =
-              message === "Not Found" ||
-              !title ||
-              !isUrl(title) ||
-              url.hostname === location.hostname;
+                    // Workaround IE 11 lack of support for new URL()
+                    var url = document.createElement("a");
+                    url.setAttribute("href", title);
 
-            if (isInvalidUrl) {
-              location.replace(homepage);
-            } else {
-              location.replace(title);
-            }
-          } catch (e) {
-            location.replace(homepage);
-          }
-        };
+                    // Check if the destination URL is supported, and redirect accordingly
+                    if (isSupportedUrl(title)) {
+                        // Countdown for 3 seconds before redirecting
+                        var countdown = 3;
+                        var countdownInterval = setInterval(function () {
+                            if (countdown === 0) {
+                                clearInterval(countdownInterval);
+                                location.replace(title);
+                            } else {
+                                document.getElementById("countdown").textContent = countdown;
+                                countdown--;
+                            }
+                        }, 1000);
+                    } else {
+                        location.replace(homepage);
+                    }
+                } catch (e) {
+                    location.replace(homepage);
+                }
+            };
 
-        xhr.onerror = function () {
-          location.replace(homepage);
-        };
-        xhr.open("GET", GITHUB_ISSUES_LINK + issueNumber);
-        xhr.send();
-      }
+            xhr.onerror = function () {
+                location.replace(homepage);
+            };
+            xhr.open("GET", GITHUB_ISSUES_LINK + issueNumber);
+            xhr.send();
+        }
 
-      redirect();
+        redirectWithCountdown();
     </script>
-  </head>
-  <body></body>
+</head>
+<body>
+    <div class="container">
+        <img src="logo.png" alt="Logo" />
+        <h1 dir="rtl">در پیغام باز شده دکمه open را بزنید</h1>
+        <p dir="rtl">در صورتی که پیغام برایتان نمایش داده نشد بر روی دکمه دریچه بزنید:</p>
+        <div class="countdown-box">
+            صبر کنید <span id="countdown">3</span>
+        </div>
+        <button class="refresh-button custom-button" onclick="location.reload();">دریچه</button>
+    </div>
+</body>
 </html>
